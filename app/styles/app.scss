@@ -24,3 +24,18 @@ img {
     font-size: 20px;
   }
 }
+
+.formy {
+  input[type="submit"]{
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    background-color: tomato;
+    color: white;
+    &:hover {
+      background-color: lighten(tomato, 5%)
+    }
+  }
+}

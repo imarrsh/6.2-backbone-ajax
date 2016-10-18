@@ -25,6 +25,7 @@ var models = require('./models/posts');
   $('#fetch-posts').on('click', function(){
     var $this = $(this);
 
+    // check if the collection is larger than whats onscreen
     if($posts.length > allPosts.length){
       // backbone fecth (ajax method, push to call stack)
       allPosts.fetch().then(function(){
