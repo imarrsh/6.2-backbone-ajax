@@ -15,3 +15,12 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 img {
   max-width: 100%;
 }
+
+.posts {
+  li {
+    list-style: none;
+  }
+  p {
+    font-size: 20px;
+  }
+}
