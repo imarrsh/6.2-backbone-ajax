@@ -30,7 +30,7 @@ var models = require('./models/posts');
       // backbone fecth (ajax method, push to call stack)
       allPosts.fetch().then(function(){
         // make button available again
-        $this.text('Give Me Posts!');
+        $this.text('Gimme Posts!');
         $this.prop('disabled', false);
         $app.append(formTemplate());
       });
@@ -47,7 +47,8 @@ var models = require('./models/posts');
       console.log('emitting add event');
       var context = {
         title : post.get('title'),
-        body : post.get('body')
+        body : post.get('body'),
+        id: post.get('_id')
       };
       $posts.append(postTemplate(context));
     }
@@ -63,10 +64,23 @@ var models = require('./models/posts');
 
   $app.on('submit', '#post-submit', function(e){
     e.preventDefault();
-    allPosts.create({
-      title: $('input[name="title"]').val(),
-      body: $('textarea[name="body"]').val()
-    });
+    if($('#post-submit input').val() !== ''){
+      allPosts.create({
+        title: $('input[name="title"]').val(),
+        body: $('textarea[name="body"]').val()
+      });
+    }
+  });
+
+  $app.on('click', '.js-remove-post', function(){
+    var postId = $(this).parents('.post').data('id');
+    var postToRemove = allPosts.findWhere({'_id' : postId});
+    var getPost = allPosts.get(postToRemove);
+    getPost.destroy();
+  });
+
+  allPosts.on('destroy', function(post){
+    console.log('destroying: ', post);
   });
 
 
