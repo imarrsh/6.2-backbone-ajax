@@ -1,4 +1,5 @@
 var jQuery = require('jquery');
+var _ = require('underscore');
 var Backbone = require('backbone');
 var Handlebars = require('handlebars');
 
@@ -76,7 +77,9 @@ var models = require('./models/posts');
     var postId = $(this).parents('.post').data('id');
     var postToRemove = allPosts.findWhere({'_id' : postId});
     var getPost = allPosts.get(postToRemove);
-    getPost.destroy();
+    getPost.destroy({
+      wait: true
+    });
   });
 
   allPosts.on('destroy', function(post){
