@@ -2,7 +2,9 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 
 // set up model container
-var Post = Backbone.Model.extend();
+var Post = Backbone.Model.extend({
+  idAttribute : '_id'
+});
 
 var PostCollection = Backbone.Collection.extend({
   model: Post,

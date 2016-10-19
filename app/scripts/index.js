@@ -73,17 +73,20 @@ var models = require('./models/posts');
     }
   });
 
+  // fire off the destroy event on a model
   $app.on('click', '.js-remove-post', function(){
     var postId = $(this).parents('.post').data('id');
     var postToRemove = allPosts.findWhere({'_id' : postId});
-    var getPost = allPosts.get(postToRemove);
-    getPost.destroy({
+    postToRemove.destroy({
       wait: true
     });
   });
 
+  // on the 'destroy' event, do some stuff
   allPosts.on('destroy', function(post){
     console.log('destroying: ', post);
+    var elId = $('#'+ post.get('id'));
+    console.log(elId);
   });
 
 
